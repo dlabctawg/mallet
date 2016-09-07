@@ -1,0 +1,21 @@
+---
+title: "mallet"
+output: html_document
+---
+
+```{r init, include=FALSE}
+rm(list=ls())
+cat('\014')
+knitr::opts_chunk$set(echo = TRUE)
+require(data.table)
+require(mallet)
+```
+
+```{r import}
+load('../icpsr-import/security-sample.RData')
+sdb<-na.omit(sdb$docs)
+
+#format annual database for mallet
+system.time(sdb<-sdb[,list(doc=paste(rep(t,N),collapse=' ')),by=c('speechID','y')]) 
+```
+
